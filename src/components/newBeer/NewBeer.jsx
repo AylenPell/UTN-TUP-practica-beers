@@ -61,7 +61,7 @@ const NewBeer = ({ onAddBeer }) => {
     }
 
     return (
-        <Card className="m-4 w-50" bg="black">
+        <Card className="m-4 w-70" bg="black">
             <Card.Body>
                 <Form className="text-white" onSubmit={handleAddBeer}>
                     <Row>
