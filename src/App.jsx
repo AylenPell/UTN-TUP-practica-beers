@@ -1,8 +1,8 @@
 import { BrowserRouter, Route, Routes } from 'react-router'
 import './App.css'
 import { NotFound } from './components/notFound/NotFound'
-import { beersData } from './data/beersData'
 import Dashboard from './components/dashboard/dashboard'
+import Login from './components/auth/login/Login'
 
 
 function App() {
@@ -12,8 +12,8 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path='*' element={<NotFound />} />
-          <Route path='/library' element={<Dashboard />} />
-          <Route path='/' element={<Dashboard />} />
+          <Route path='/brewery' element={<Dashboard />} />
+          <Route path='/' element={<Login />} />
         </Routes>
       </BrowserRouter>
     </div>

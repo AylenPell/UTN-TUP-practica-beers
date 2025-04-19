@@ -5,7 +5,7 @@ import { useNavigate } from "react-router"
 export const NotFound = () => {
     const navigate = useNavigate();
     const handlerGoBack = () => {
-        navigate("/library")
+        navigate("/brewery")
     }
 
     return (

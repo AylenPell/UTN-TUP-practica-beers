@@ -1,16 +1,42 @@
 import React, { use, useState } from 'react'
 import BeerItem from '../beerItem/BeerItem'
 import BeerSearch from '../beerSearch/BeerSearch'
+import ModalDelete from '../beerItem/modalDelete/ModalDelete';
 
-const BeerList = ({ beersData }) => {
+const initialModalState = {
+    show: false,
+    id: 0,
+    name: ""
+}
+
+const BeerList = ({ beersData, onDeleteBeer }) => {
     const [beerDrinked, setBeerDrinked] = useState("");
     const [wantedBeer, setWantedBeer] = useState("");
+    const [deleteModal, setDeleteModal] = useState(initialModalState);
 
     const handleBeerDrinked = (beerName) => {
         setBeerDrinked(beerName)
     }
     const handleBeerSearch = (value) => {
         setWantedBeer(value)
+    }
+
+    const handleShowDeleteModal = (beerId, beerName) => {
+        setDeleteModal({
+            show: true,
+            id: beerId,
+            name: beerName
+        });
+    }
+
+    const handleHideDeleteModal = () => {
+        setDeleteModal(initialModalState);
+    }
+
+    const handleDeleteBeer = (beerId) => {
+        onDeleteBeer(beerId);
+        setWantedBeer("");
+        handleHideDeleteModal();
     }
 
     const beersMapped = beersData
@@ -26,12 +52,20 @@ const BeerList = ({ beersData }) => {
                 beerRating={beer.rating}
                 beerStock={beer.available}
                 onBeerDrinked={handleBeerDrinked}
+                onShowDeleteBeer={handleShowDeleteModal}
                 />
             )
         }); 
 
     return (
         <>
+            <ModalDelete
+                show={deleteModal.show}
+                beerId={deleteModal.id}
+                beerName={deleteModal.name}
+                onCancel={handleHideDeleteModal}
+                onDeleteBeer={handleDeleteBeer}
+            />
             <div className='comments-div'>
                 {beerDrinked ? (
                     <p className='comments-p'>Tomaré una <b>{beerDrinked}!</b></p>

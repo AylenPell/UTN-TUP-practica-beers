@@ -2,7 +2,17 @@ import React, { useState } from 'react'
 import { Badge, Card, Button } from 'react-bootstrap';
 import { FaStar, FaRegStar } from 'react-icons/fa';
 
-const BeerItem = ({beerId, beerName, beerPrice, beerStyle, beerRating, beerStock, beerPic, onBeerDrinked}) => {
+const BeerItem = ({
+    beerId, 
+    beerName, 
+    beerPrice, 
+    beerStyle, 
+    beerRating, 
+    beerStock, 
+    beerPic, 
+    onBeerDrinked, 
+    onShowDeleteBeer
+}) => {
     const dollarPrice = 1320;
     const [newTitle, setNewTitle] = useState(beerName)
 
@@ -34,6 +44,10 @@ const BeerItem = ({beerId, beerName, beerPrice, beerStyle, beerRating, beerStock
         return <div style={{ fontSize: '10px' }}>{stars}</div>;
       };
 
+    const handleDeleteBeer = () => {
+        onShowDeleteBeer(beerId, beerName)
+    }
+
     return (
         <Card style={{width: "15rem"}} className = "m-3">
             <Card.Img
@@ -58,11 +72,20 @@ const BeerItem = ({beerId, beerName, beerPrice, beerStyle, beerRating, beerStock
                 <Card.Subtitle>{beerStyle}</Card.Subtitle>
                 <div>{starsRating(beerRating)}</div>
                 <p>${(beerPrice*dollarPrice).toFixed(2)}</p>
-                <Button 
-                    className='btn btn-dark btn-sm' 
-                    onClick={handleYum}>
-                    Tomar cerveza!
-                </Button>
+                <div className='d-flex justify-content-spaced-between mb-1'>
+                    <Button 
+                        style={{ fontSize: '11px' }}
+                        className='btn btn-dark btn-sm mx-2' 
+                        onClick={handleYum}>
+                        Tomar cerveza!
+                    </Button>
+                    <Button 
+                        style={{ fontSize: '11px' }}
+                        className='btn btn-secondary btn-sm' 
+                        onClick={handleDeleteBeer}>
+                        Eliminar cerveza
+                    </Button>
+                </div>
             </Card.Body>  
         </Card>
     )
