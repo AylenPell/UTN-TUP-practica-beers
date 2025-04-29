@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import { Button, Card, Col, Form, FormGroup, Row } from "react-bootstrap";
 import { useNavigate } from "react-router";
 
-const Login = () => {
+const Login = ({ onLogin }) => {
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
@@ -37,11 +37,12 @@ const Login = () => {
     if (!emailRef.current.value.length) {
       setErrors({ ...errors, email: true });
       emailRef.current.focus();
-    } else if (!passwordRef.current.value.length || passwordRef.current.value.length < 7) {
+    } else if (!passwordRef.current.value.length || passwordRef.current.value.length < 6) {
       setErrors({ ...errors, password: true });
       passwordRef.current.focus();
     } else {
       setErrors({ email: false, password: false });
+      onLogin();
       navigate("/brewery");
     }
   };
@@ -56,28 +57,26 @@ const Login = () => {
           <FormGroup className="mb-4">
             <Form.Control
               type="email"
-              className={`${errors.email ? "border border-danger" : ""}`} // no funciona
-              required
+              className={errors.email ? "border border-danger" : ""}
               ref={emailRef}
               placeholder="Ingresar email"
               onChange={handleEmailChange}
               value={email}
             />
-            {errors.email && <p className="text-danger">El email está vacío</p>}
+            {errors.email && <p className="text-danger mt-1 text-end fs-6">El email está vacío</p>}
           </FormGroup>
           <FormGroup className="mb-4">
             <Form.Control
               type="password"
-              className={`${errors.password ? "border border-danger" : ""}`} // este si
-              required
+              className={errors.password ? "border border-danger" : ""} 
               ref={passwordRef}
               placeholder="Ingresar contraseña"
               onChange={handlePasswordChange}
               value={password}
             />
             {errors.password && (
-              <p className="text-danger">
-                La contraseña debe tener al menos 7 caracteres
+              <p className="text-danger mt-1 text-end fs-6">
+                La contraseña debe tener al menos 6 caracteres
               </p>
             )}
           </FormGroup>

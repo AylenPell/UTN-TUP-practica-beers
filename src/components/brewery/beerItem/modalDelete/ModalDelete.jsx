@@ -10,6 +10,7 @@ function ModalDelete({
 }) {
     
     const handleDeleteBeer = () =>{
+        console.log(beerId);
         onDeleteBeer(beerId);
     }
      

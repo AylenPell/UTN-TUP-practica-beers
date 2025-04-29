@@ -44,15 +44,16 @@ const BeerList = ({ beersData, onDeleteBeer }) => {
         .map((beer) => {
             return (
                 <BeerItem
-                key={beer.id}
-                beerPic={beer.image}
-                beerName={beer.beerName}
-                beerStyle={beer.beerStyle.toUpperCase()}
-                beerPrice={beer.price}
-                beerRating={beer.rating}
-                beerStock={beer.available}
-                onBeerDrinked={handleBeerDrinked}
-                onShowDeleteBeer={handleShowDeleteModal}
+                    key={beer.id}
+                    beerId={beer.id} 
+                    beerPic={beer.image}
+                    beerName={beer.beerName}
+                    beerStyle={beer.beerStyle.toUpperCase()}
+                    beerPrice={beer.price}
+                    beerRating={beer.rating}
+                    beerStock={beer.available}
+                    onBeerDrinked={handleBeerDrinked}
+                    onShowDeleteBeer={handleShowDeleteModal}
                 />
             )
         }); 

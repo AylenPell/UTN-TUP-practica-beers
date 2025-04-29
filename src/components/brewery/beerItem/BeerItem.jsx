@@ -91,4 +91,4 @@ const BeerItem = ({
     )
 }
 
-export default BeerItem
+export default BeerItem;
